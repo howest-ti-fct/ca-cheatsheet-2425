@@ -1,0 +1,6 @@
+.env
+coverage
+old
+data
+.DS_Store
+.vscode

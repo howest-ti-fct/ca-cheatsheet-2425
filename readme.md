@@ -1,4 +1,4 @@
-# Clean Architecture Guide with TypeScript
+# Clean Architecture guide with Deno/Typescript
 
 This guide provides an overview of Clean Architecture principles and a step-by-step approach to structuring projects into distinct layers. Following this architecture ensures scalability, maintainability, and testability by enforcing separation of concerns.
 
@@ -42,6 +42,7 @@ The **Domain** layer is the core of the application, containing business rules a
 ### Step-by-Step Guide
 1. Define **entities** and **value objects** as plain classes, encapsulating business logic.
 2. Create **repository interfaces** with method definitions for data access.
+   - Only create repositories for aggregates. 
 3. Write **unit tests** to validate business logic and enforce domain constraints.
 
 ---
@@ -70,6 +71,8 @@ The **Application** layer coordinates the flow of the application by implementin
 ### Step-by-Step Guide
 1. Implement **use cases**, injecting queries or repositories and unit of work.
 2. Define input and output interfaces for use cases.
+   - Output could also be a simple string, int, boolean. No need to wrap everything in an object.
+   - If there is no output, don't create a return type, just return void.
 3. Write **unit tests** using mock repositories to verify interactions and expected results.
 
 ---
@@ -92,11 +95,12 @@ The **Infrastructure** layer provides **concrete** implementations of queries, r
   - Define an **Async API specification** for event-driven interactions.
 
 ### Step-by-Step Guide
-1. Implement persistence interfaces:
+1. Implement Persistence interfaces:
     1. If needed, implement **concrete** repository based on the **repository interfaces**, ensuring proper entity mapping and data consistency.
     2. If needed, implement **concrete** queries based on the **query interfaces** for efficient data retrieval.
 2. Implement Web API (if applicable):
     1. Create **Web API controllers** to handle HTTP requests and map input/output models.
+       - A controllers **uses** a use case to execute the business logic. 
     2. Define **routes** for API endpoints following RESTful principles.
 3. Implement Messaging (if applicable):
     1. Implement **messaging controllers** for handling asynchronous events.

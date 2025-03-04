@@ -169,10 +169,11 @@ The **Main** layer is responsible for object creation and application initializa
 ### DOMAIN
 - Implement domain logic if not already present.
 - Write unit tests to validate domain logic.
-
-### APPLICATION: USE CASES (AND CONTRACTS)
-- Add the repository interface if missing in the domain.
+- If the entity needs a repository, add the repository interface.
 - Include the repository interface in `mod.ts` in the application layer.
+  
+### APPLICATION: USE CASES (AND CONTRACTS)
+
 - Implement a use case with **Unit of Work** and repository interaction.
 - Write unit tests to verify the use case logic.
 
